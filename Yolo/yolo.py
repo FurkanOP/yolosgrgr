@@ -5,7 +5,7 @@ import random
 import time 
  
 # Model ve cfg dosya yollarını yazın
-net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
+net = cv2.dnn.readNet("yolov2-tiny.weights", "yolov3.cfg")
  
 # Nesne isimlerini 'coco.names' dosyasından çekme
 classes = []
