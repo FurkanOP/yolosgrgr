@@ -3,7 +3,7 @@ import numpy as np
 import glob
 import random
 import time 
- 
+ # yolonun sitesinden coklu foto acma koduna bak
 # Model ve cfg dosya yollarını yazın
 net = cv2.dnn.readNet("yolov2-tiny.weights", "yolov3.cfg")
  
