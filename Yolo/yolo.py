@@ -3,9 +3,15 @@ import numpy as np
 import glob
 import random
 import time 
- # yolonun sitesinden coklu foto acma koduna bak
+import os
+
+# Klasör içini sayma
+os.chdir("C:\\Users\\furkan\\Desktop\\Yolo\\resimler")
+sayi = os.listdir()
+
+
 # Model ve cfg dosya yollarını yazın
-net = cv2.dnn.readNet("yolov2-tiny.weights", "yolov3.cfg")
+net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
  
 # Nesne isimlerini 'coco.names' dosyasından çekme
 classes = []
@@ -13,8 +19,8 @@ with open("coco.names", "r") as f:
     classes = [line.strip().capitalize().strip() for line in f.readlines()]
  
 # Resim yolu
-for i in range(1,5,1):
-    images_path = glob.glob(str(i)+".jpg")
+for i in range(1,len(sayi)+1,1):
+    images_path = glob.glob("C:\\Users\\furkan\\Desktop\\Yolo\\resimler\\"+str(i)+".jpg")
  
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -79,8 +85,7 @@ for i in range(1,5,1):
                 cv2.putText(textBg, label, (x, y-3), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1)
     
         cv2.imshow("Image", img)
-# Çıktıyı kayıt et
-# cv2.imwrite("resim.png", img)
-key = cv2.waitKey(0)
-time.sleep(5)
-cv2.destroyAllWindows()
+    # Çıktıyı kayıt eta
+    # cv2.imwrite("resim.png", img)
+    key = cv2.waitKey(5000)
+    cv2.destroyAllWindows()
