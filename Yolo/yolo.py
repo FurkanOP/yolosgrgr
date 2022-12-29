@@ -5,11 +5,20 @@ import random
 import time 
 import os
 
-# Klasör içini sayma
-os.chdir("C:\\Users\\furkan\\Desktop\\Yolo\\resimler")
-sayi = os.listdir()
 
+ # yolonun sitesinden coklu foto acma koduna bakcd
+dosyatxt = open()
+os.chdir(r"F:\\Yolo\\")
+dosyalar=os.listdir()
+print(dosyalar)
 
+#jpeg lisetesi yapma
+jpgliste=[]
+for i in dosyalar:
+    if i.endswith(".jpg"):
+        jpgliste.append(i)
+       
+print(jpgliste)
 # Model ve cfg dosya yollarını yazın
 net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
  
@@ -19,8 +28,9 @@ with open("coco.names", "r") as f:
     classes = [line.strip().capitalize().strip() for line in f.readlines()]
  
 # Resim yolu
-for i in range(1,len(sayi)+1,1):
-    images_path = glob.glob("C:\\Users\\furkan\\Desktop\\Yolo\\resimler\\"+str(i)+".jpg")
+for i in jpgliste:
+    
+    images_path = glob.glob(i)
  
     layer_names = net.getLayerNames()
     output_layers = [layer_names[i - 1] for i in net.getUnconnectedOutLayers()]
@@ -72,6 +82,7 @@ for i in range(1,len(sayi)+1,1):
                 # print(f"{round(confidences[i],2)}")
     
                 dogruluk = (f"%{round(confidences[i],2)}")
+                
                 label = (f"{classes[class_ids[i]]} {dogruluk}")
     
                 color = [int(c) for c in colors[class_ids[i]]]
